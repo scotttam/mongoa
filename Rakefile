@@ -11,8 +11,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "mongoa"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{Like Shoulda but for MongoMapper.}
+    gem.description = %Q{Adds the association and validation macros for Rspec in the same way Shoulda does for ActiveRecord.}
     gem.email = "tamosunas@gmail.com"
     gem.homepage = "http://github.com/scotttam/mongoa"
     gem.authors = ["Scott J. Tamosunas"]

@@ -6,3 +6,4 @@ module Mongoa
     end
   end
 end
+

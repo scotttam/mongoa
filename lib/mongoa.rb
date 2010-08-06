@@ -1,5 +1,5 @@
-module RSpec
-  module Matchers
-    include Mongoa::MongoMapper::Matchers
-  end
+if defined?(RSpec)
+  require 'mongoa/integrations/rspec2'
+else
+  raise 'DONT SUPPORT THAT TEST FRAMEWORK'
 end
