@@ -27,7 +27,11 @@ module Mongoa
           return false
         end
         @subject = subject
-        association_exists? && macro_correct? && foreign_key_exists?
+        result = (association_exists? && macro_correct?)
+        if result && macro == :belongs_to
+          result = foreign_key_exists?
+        end
+        result
       end
 
       def failure_message
@@ -53,7 +57,6 @@ module Mongoa
       end
 
       def model_class
-        p @subject
         @subject.class
       end
 
@@ -74,17 +77,14 @@ module Mongoa
       def association_exists?
         if !association
           @missing = "no association called #{name}"
-          false
+          return false
         end
         true
       end
       
-      def association_exists?
-        association
-      end
-
-      def macro_correct?
-        association.type == macro
+     def macro_correct?
+        (association.type == :belongs_to && macro == :belongs_to) ||
+        (association.type == :many && macro == :has_many)
       end
 
       def foreign_key_exists?
@@ -92,7 +92,7 @@ module Mongoa
       end
 
       def belongs_to_foreign_key_exists?
-        macro == :belongs_to && model_class.keys.keys.include?("#{reflection_name}_id")
+        model_class.keys.keys.include?("#{reflection_name}_id")
       end
 
       def reflection_name
