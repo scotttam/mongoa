@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{mongoa}
-  s.version = "0.0.1"
+  s.version = "0.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Scott J. Tamosunas"]
@@ -26,6 +26,8 @@ Gem::Specification.new do |s|
      "lib/mongoa.rb",
      "lib/mongoa/matchers.rb",
      "lib/mongoa/mongo_mapper/association_matcher.rb",
+     "lib/mongoa/rspec2.rb",
+     "mongoa.gemspec",
      "spec/mongoa_spec.rb",
      "spec/spec.opts",
      "spec/spec_helper.rb"
