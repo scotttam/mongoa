@@ -1,7 +1,7 @@
 module Mongoa
   module MongoMapper
     module Matchers
-      def belong_to(name)
+      def belongs_to(name)
         MongoAssociationMatcher.new(:belongs_to, name)
       end
 
