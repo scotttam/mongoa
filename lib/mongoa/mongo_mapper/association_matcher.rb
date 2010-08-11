@@ -27,6 +27,7 @@ module Mongoa
           return false
         end
         @subject = subject
+        
         result = (association_exists? && macro_correct?)
         result = foreign_key_exists? if result && macro == :belongs_to && !subject.class.embeddable?
         result

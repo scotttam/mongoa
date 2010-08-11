@@ -1,47 +1,44 @@
 module Mongoa
   module MongoMapper
     module Matchers
-      
       def validate_presence_of(attr)
-        ValidatePresenceOfMatcher.new(attr)
+        ValidateMatcher.new("ValidatesPresenceOf", attr)
+      end
+    end
+
+    class ValidateMatcher
+      attr_reader :validation_type
+      attr_reader :attribute
+      
+      def initialize(validation_type, attribute)
+        @validation_type = validation_type
+        @attribute = attribute
       end
 
-      class ValidatePresenceOfMatcher < ValidationMatcher
+      def matches?(subject)
+        @subject = subject
+        attr_validations = model_class.validations.select { |validation| validation.attribute == attribute }
+        return false unless attr_validations
+        attr_validations.detect { |validation| validation.key.include?(validation_type) }
+      end
 
-        def with_message(message)
-          @expected_message = message if message
-          self
-        end
+      def description
+        "require #{@attribute} to be set"
+      end
 
-        def matches?(subject)
-          super(subject)
-          @expected_message ||= :blank
-          disallows_value_of(blank_value, @expected_message)
-        end
+      def failure_message
+        "#{@attribute} to be a required field (validates_presence_of) but was not"
+      end
 
-        def description
-          "require #{@attribute} to be set"
-        end
-
-        private
-
-        def blank_value
-          if collection?
-            []
-          else
-            nil
-          end
-        end
-
-        def collection?
-          if reflection = @subject.class.reflect_on_association(@attribute)
-            [:has_many, :has_and_belongs_to_many].include?(reflection.macro)
-          else
-            false
-          end
-        end
+      def negative_failure_message
+        "#{@attribute} to not be a required field (validates_presence_of), but it was"
       end
       
+      private
+
+      def model_class
+        @subject.class
+      end
     end
   end
 end
