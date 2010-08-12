@@ -9,7 +9,7 @@ module Mongoa
         ValidatePresenceOfMatcher.new(attr)
       end
       
-      def validates_inclusion_of(attr, within)
+      def validate_inclusion_of(attr, within)
         ValidateInclusionOfMatcher.new(attr, within)
       end
     end
