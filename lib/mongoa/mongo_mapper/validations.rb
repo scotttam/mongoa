@@ -15,7 +15,7 @@ module Mongoa
       end
 
       def validate_length_of(attr, length_options)
-        ValidateLegnthOfMatcher.new(attr, length_options)
+        ValidateLengthOfMatcher.new(attr, length_options)
       end
     end
   end
