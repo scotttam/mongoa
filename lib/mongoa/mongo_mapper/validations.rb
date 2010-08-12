@@ -13,6 +13,10 @@ module Mongoa
       def validate_inclusion_of(attr, within)
         ValidateInclusionOfMatcher.new(attr, within)
       end
+
+      def validate_length_of(attr, length_options)
+        ValidateLegnthOfMatcher.new(attr, length_options)
+      end
     end
   end
 end
