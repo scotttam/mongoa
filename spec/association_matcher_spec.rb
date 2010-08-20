@@ -40,6 +40,26 @@ class EmbeddedCommentNoSpecification
   include MongoMapper::EmbeddedDocument
 end
 
+class Employee
+  include MongoMapper::Document
+  key :name, :required => true
+  
+  has_one :office
+end
+
+class EmployeeWOutHO
+  include MongoMapper::Document
+  key :name, :required => true
+  
+end
+
+class Office
+  include MongoMapper::Document
+  key :name, :required => true
+  
+  belongs_to :employee
+end
+
 describe Mongoa::MongoMapper::Matchers do
   describe "#belongs_to" do
     describe "document" do
@@ -76,6 +96,18 @@ describe Mongoa::MongoMapper::Matchers do
     it "should return false of the has_many relationship is not specified" do
       matcher = Mongoa::MongoMapper::MongoAssociationMatcher.new(:has_many, :comments)
       matcher.should_not be_matches(PostWOutHM.new)
+    end
+  end
+  
+  describe "#has_one" do
+    it "should return true if the has_one relationship is specified" do
+      matcher = Mongoa::MongoMapper::MongoAssociationMatcher.new(:has_one, :office)
+      matcher.should be_matches(Employee.new)
+    end
+    
+    it "should return false if the has_one relationship is not specified" do
+      matcher = Mongoa::MongoMapper::MongoAssociationMatcher.new(:has_one, :office)
+      matcher.should_not be_matches(EmployeeWOutHO.new)
     end
   end
 end

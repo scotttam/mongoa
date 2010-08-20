@@ -8,6 +8,10 @@ module Mongoa
       def have_many(name)
         MongoAssociationMatcher.new(:has_many, name)
       end
+
+      def has_one(name)
+        MongoAssociationMatcher.new(:has_one, name)
+      end
     end
 
     class MongoAssociationMatcher
@@ -83,7 +87,8 @@ module Mongoa
       
      def macro_correct?
         (association.type == :belongs_to && macro == :belongs_to) ||
-        (association.type == :many && macro == :has_many)
+        (association.type == :many && macro == :has_many) ||
+        (association.type == :one && macro == :has_one)
       end
 
       def foreign_key_exists?
