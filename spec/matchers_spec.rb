@@ -20,9 +20,10 @@ describe Mongoa::MongoMapper::Matchers do
   end
   
   describe "validations" do
-    it "should expose validate_presence_of, validate_inclusion_of and validate_length_of methods" do
+    it "should expose validate_presence_of, validate_inclusion_of, validates_uniqueness_of and validate_length_of methods" do
       @tester.methods.should include(:validate_presence_of)
       @tester.methods.should include(:validate_inclusion_of)
+      @tester.methods.should include(:validate_uniqueness_of)
       @tester.methods.should include(:validate_length_of)
     end
   end

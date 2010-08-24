@@ -24,15 +24,18 @@ class Post
   include MongoMapper::Document
   
   key :name, String
+  key :unique_name, String
   
   validates_presence_of :name
   validates_length_of :name, :minimum => 4, :maximum => 32
+  validates_uniqueness_of :unique_name
 end
 
 class PostRequired
   include MongoMapper::Document
   
   key :name, String, :required => true, :length => 32
+  key :unique_name, String, :unique => true
   key :range_name, String, :required => true, :length => 0..56
 end
 

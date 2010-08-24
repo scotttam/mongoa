@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{mongoa}
-  s.version = "0.1.12"
+  s.version = "0.1.13"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Scott J. Tamosunas"]
-  s.date = %q{2010-08-20}
+  s.date = %q{2010-08-24}
   s.description = %q{Adds the association and validation macros for Rspec in the same way Shoulda does for ActiveRecord.}
   s.email = %q{tamosunas@gmail.com}
   s.extra_rdoc_files = [
@@ -25,19 +25,20 @@ Gem::Specification.new do |s|
      "VERSION",
      "lib/mongoa.rb",
      "lib/mongoa/integrations/rspec2.rb",
-     "lib/mongoa/mongo_mapper/association_matcher.rb",
+     "lib/mongoa/mongo_mapper/associations/all.rb",
      "lib/mongoa/mongo_mapper/improvements/mongo_mapper_associations.rb",
      "lib/mongoa/mongo_mapper/matchers.rb",
-     "lib/mongoa/mongo_mapper/validations.rb",
      "lib/mongoa/mongo_mapper/validations/validate_base.rb",
      "lib/mongoa/mongo_mapper/validations/validate_inclusion_of.rb",
      "lib/mongoa/mongo_mapper/validations/validate_length_of.rb",
      "lib/mongoa/mongo_mapper/validations/validate_presence_of.rb",
      "mongoa.gemspec",
-     "spec/association_matcher_spec.rb",
-     "spec/spec.opts",
+     "spec/assoications/all_spec.rb",
+     "spec/matchers_spec.rb",
      "spec/spec_helper.rb",
-     "spec/validation_matcher_spec.rb"
+     "spec/validations/validate_inclusion_of_spec.rb",
+     "spec/validations/validate_length_of_spec.rb",
+     "spec/validations/validate_presence_of_spec.rb"
   ]
   s.homepage = %q{http://github.com/scotttam/mongoa}
   s.rdoc_options = ["--charset=UTF-8"]
@@ -45,9 +46,12 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Like Shoulda but for MongoMapper.}
   s.test_files = [
-    "spec/association_matcher_spec.rb",
+    "spec/assoications/all_spec.rb",
+     "spec/matchers_spec.rb",
      "spec/spec_helper.rb",
-     "spec/validation_matcher_spec.rb"
+     "spec/validations/validate_inclusion_of_spec.rb",
+     "spec/validations/validate_length_of_spec.rb",
+     "spec/validations/validate_presence_of_spec.rb"
   ]
 
   if s.respond_to? :specification_version then
