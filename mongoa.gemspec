@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{mongoa}
-  s.version = "0.1.13"
+  s.version = "0.1.14"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Scott J. Tamosunas"]
@@ -32,13 +32,15 @@ Gem::Specification.new do |s|
      "lib/mongoa/mongo_mapper/validations/validate_inclusion_of.rb",
      "lib/mongoa/mongo_mapper/validations/validate_length_of.rb",
      "lib/mongoa/mongo_mapper/validations/validate_presence_of.rb",
+     "lib/mongoa/mongo_mapper/validations/validate_uniqueness_of.rb",
      "mongoa.gemspec",
      "spec/assoications/all_spec.rb",
      "spec/matchers_spec.rb",
      "spec/spec_helper.rb",
      "spec/validations/validate_inclusion_of_spec.rb",
      "spec/validations/validate_length_of_spec.rb",
-     "spec/validations/validate_presence_of_spec.rb"
+     "spec/validations/validate_presence_of_spec.rb",
+     "spec/validations/validate_uniqueness_of_spec.rb"
   ]
   s.homepage = %q{http://github.com/scotttam/mongoa}
   s.rdoc_options = ["--charset=UTF-8"]
@@ -51,7 +53,8 @@ Gem::Specification.new do |s|
      "spec/spec_helper.rb",
      "spec/validations/validate_inclusion_of_spec.rb",
      "spec/validations/validate_length_of_spec.rb",
-     "spec/validations/validate_presence_of_spec.rb"
+     "spec/validations/validate_presence_of_spec.rb",
+     "spec/validations/validate_uniqueness_of_spec.rb"
   ]
 
   if s.respond_to? :specification_version then
