@@ -30,7 +30,7 @@ module Mongoa
       end
 
       def validate_uniqueness_of(attr)
-        # ValidateUniquenessOfMatcher.new(attr)
+        ValidateUniquenessOfMatcher.new(attr)
       end
 
       def validate_length_of(attr, length_options)
