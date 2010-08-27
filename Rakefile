@@ -27,5 +27,5 @@ RSpec::Core::RakeTask.new(:spec) do |t|
   t.rcov = false
 end
 
-task :spec => :check_dependencies
+# task :spec => :check_dependencies
 task :default => :spec

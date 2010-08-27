@@ -42,7 +42,7 @@ module Mongoa
       protected
 
       def association
-        @association ||= model_class.find_association(name)
+        @association ||= find_association(model_class, name)
       end
 
       def model_class
@@ -87,6 +87,11 @@ module Mongoa
 
       def reflection_name
         @reflection ||= association.class_name.underscore
+      end
+      
+      def find_association(model_class, name)
+        name_association = model_class.associations.detect {|key, value| key.to_s == name.to_s}
+        name_association ? name_association.last : nil
       end
     end
   end
