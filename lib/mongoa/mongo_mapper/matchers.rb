@@ -1,4 +1,3 @@
-require 'mongoa/mongo_mapper/improvements/mongo_mapper_associations'
 require 'mongoa/mongo_mapper/associations/all'
 require 'mongoa/mongo_mapper/validations/validate_base'
 require 'mongoa/mongo_mapper/validations/validate_presence_of'
