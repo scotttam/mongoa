@@ -25,9 +25,12 @@ class User
   
   key :name, String
   key :email, String
+  key :years_alive, Integer
+  key :years_alive_numeric, Integer, :numeric => true
   key :email_format, String, :format => /(\A(\s*)\Z)|(\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z)/i
   
   validates_format_of :email, :with => /(\A(\s*)\Z)|(\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z)/i
+  validates_numericality_of :years_alive
 end
 
 class Post

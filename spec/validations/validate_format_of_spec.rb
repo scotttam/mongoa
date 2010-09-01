@@ -7,7 +7,7 @@ describe Mongoa::MongoMapper do
         before(:each) do
           @validation = Mongoa::MongoMapper::Matchers::ValidateFormatOfMatcher.new(:email)
         end
-        it "should return true if the key has a validates_presence_of validtion" do
+        it "should return true if the key has a validates_format_of validtion" do
           @validation.with(/(\A(\s*)\Z)|(\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z)/i).should be_matches(User.new)
         end
         

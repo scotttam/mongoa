@@ -5,6 +5,7 @@ require 'mongoa/mongo_mapper/validations/validate_inclusion_of'
 require 'mongoa/mongo_mapper/validations/validate_uniqueness_of'
 require 'mongoa/mongo_mapper/validations/validate_length_of'
 require 'mongoa/mongo_mapper/validations/validate_format_of'
+require 'mongoa/mongo_mapper/validations/validate_numericality_of'
 
 module Mongoa
   module MongoMapper
