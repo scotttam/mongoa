@@ -20,6 +20,16 @@ end
 require 'mongoa'
 require File.expand_path(File.dirname(__FILE__) + '/../lib/mongoa/mongo_mapper/matchers')
 
+class User
+  include MongoMapper::Document
+  
+  key :name, String
+  key :email, String
+  key :email_format, String, :format => /(\A(\s*)\Z)|(\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z)/i
+  
+  validates_format_of :email, :with => /(\A(\s*)\Z)|(\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z)/i
+end
+
 class Post
   include MongoMapper::Document
   
