@@ -5,7 +5,7 @@ class Post
   key :name, String
   
   has_many :comments
-  has_many :commentwoutfks
+  has_many :comment_w_out_fks
   has_many :embedded_comment_no_specifications
 end
 
@@ -29,7 +29,14 @@ class EmbeddedComment
   belongs_to :post
 end
 
-class CommentWOutFK
+class CommentWOutFk
+  include MongoMapper::Document
+  key :description, String
+  
+  belongs_to :post
+end
+
+class CommentWOutFKAddedDynamicallyOnCreate
   include MongoMapper::Document
   key :description, String
   
@@ -70,7 +77,14 @@ describe Mongoa::MongoMapper do
       
       it "should return false if the belongs_to is present but the foreign key is missing" do
         matcher = Mongoa::MongoMapper::MongoAssociationMatcher.new(:belongs_to, :post)
-        matcher.should_not be_matches(CommentWOutFK.new)
+        matcher.should_not be_matches(CommentWOutFk.new)
+      end
+      
+      it "should return false if the belongs_to is present but the foreign key exists and it's type is null (indicating that the key was added through a create dynamically and not defined on the class)" do
+        post = Post.create(:name => "my post")
+        CommentWOutFKAddedDynamicallyOnCreate.create(:description => "hello", :post => post)
+        matcher = Mongoa::MongoMapper::MongoAssociationMatcher.new(:belongs_to, :post)
+        matcher.should_not be_matches(CommentWOutFKAddedDynamicallyOnCreate.new)
       end
     end
     

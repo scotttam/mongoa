@@ -82,7 +82,8 @@ module Mongoa
       end
 
       def belongs_to_foreign_key_exists?
-        model_class.keys.keys.include?("#{reflection_name}_id")
+        foreign_key = model_class.keys["#{reflection_name}_id"]
+        foreign_key && foreign_key.type
       end
 
       def reflection_name
