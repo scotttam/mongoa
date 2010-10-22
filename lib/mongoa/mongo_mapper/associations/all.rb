@@ -82,12 +82,13 @@ module Mongoa
       end
 
       def belongs_to_foreign_key_exists?
-        foreign_key = model_class.keys["#{reflection_name}_id"]
+        foreign_key = model_class.keys["#{association.name}_id"]
         foreign_key && foreign_key.type
       end
 
       def reflection_name
         @reflection ||= association.class_name.underscore
+        @reflection
       end
       
       def find_association(model_class, name)

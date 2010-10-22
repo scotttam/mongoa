@@ -22,6 +22,14 @@ class Comment
   belongs_to :post
 end
 
+class CommentWPostOfADifferentName
+  include MongoMapper::Document
+  key :description, String
+  key :article_id, ObjectId
+  
+  belongs_to :article, :class_name => "Post"
+end
+
 class EmbeddedComment
   include MongoMapper::EmbeddedDocument
   key :description, String
@@ -86,6 +94,13 @@ describe Mongoa::MongoMapper do
         matcher = Mongoa::MongoMapper::MongoAssociationMatcher.new(:belongs_to, :post)
         matcher.should_not be_matches(CommentWOutFKAddedDynamicallyOnCreate.new)
       end
+      
+      it "should handle when the class name cannot be inferred by the association name" do
+        post = Post.create(:name => "my post")
+        CommentWPostOfADifferentName.create(:description => "hello", :article => post)  
+        matcher = Mongoa::MongoMapper::MongoAssociationMatcher.new(:belongs_to, :article)
+        matcher.should be_matches(CommentWPostOfADifferentName.new)
+      end
     end
     
     describe "embedded" do
@@ -123,5 +138,5 @@ describe Mongoa::MongoMapper do
       matcher = Mongoa::MongoMapper::MongoAssociationMatcher.new(:has_one, :office)
       matcher.should_not be_matches(EmployeeWOutHO.new)
     end
-  end
+   end
 end
