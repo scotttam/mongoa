@@ -71,10 +71,18 @@ module Mongoa
         true
       end
   
-     def macro_correct?
-        (association.type == :belongs_to && macro == :belongs_to) ||
-        (association.type == :many && macro == :has_many) ||
-        (association.type == :one && macro == :has_one)
+      def macro_correct?
+        #The master branch version of mongo_mapper changed the associations to have concrete classes rather than be 
+        #MongoMapper::Plugins::Associations::Base and removed the type method.
+        if association.respond_to?(:type)
+          (association.type == :belongs_to && macro == :belongs_to) ||
+          (association.type == :many && macro == :has_many) ||
+          (association.type == :one && macro == :has_one)
+        else
+          (association.class.to_s == "MongoMapper::Plugins::Associations::BelongsToAssociation" && macro == :belongs_to) ||
+          (association.class.to_s == "MongoMapper::Plugins::Associations::ManyAssociation" && macro == :has_many) ||
+          (association.class.to_s == "MongoMapper::Plugins::Associations::OneAssociation" && macro == :has_one)
+        end
       end
 
       def foreign_key_exists?

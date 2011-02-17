@@ -78,7 +78,7 @@ end
 describe Mongoa::MongoMapper do
   describe "#belongs_to" do
     describe "document" do
-      it "should return true of the belongs_to relationship is specified and the foreign key is present" do
+      it "should return true if the belongs_to relationship is specified and the foreign key is present" do
         matcher = Mongoa::MongoMapper::MongoAssociationMatcher.new(:belongs_to, :post)
         matcher.should be_matches(Comment.new)
       end
