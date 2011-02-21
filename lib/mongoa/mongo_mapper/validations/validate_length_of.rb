@@ -23,17 +23,17 @@ module Mongoa
           super(subject)
           if @validation
             if @length_options.keys.include?(:minimum)
-              result = @validation.minimum == @length_options[:minimum]
+              result = minimum == @length_options[:minimum]
               return false if !result
             end
             
             if @length_options.keys.include?(:maximum)
-              result = @validation.maximum == @length_options[:maximum]
+              result = maximum == @length_options[:maximum]
               return false if !result
             end
 
-            if @length_options.keys.include?(:within)            
-              result = @validation.within == @length_options[:within]
+            if @length_options.keys.include?(:within)
+              result = within == @length_options[:within]
               return false if !result
             end
             true
@@ -58,6 +58,26 @@ module Mongoa
         
         def validation_type
           "ValidatesLengthOf"
+        end
+        
+        def validator_class_name
+           "ActiveModel::Validations::LengthValidator"
+        end
+        
+        def minimum
+          @validation.respond_to?(:minimum) ? @validation.minimum : @validation.options[:minimum]
+        end
+        
+        def maximum
+          @validation.respond_to?(:maximum) ? @validation.maximum : @validation.options[:maximum]
+        end
+
+        def within
+          if @validation.respond_to?(:within) 
+            @validation.within
+          else
+            (@validation.options[:minimum]..@validation.options[:maximum])
+          end
         end
       end
     end

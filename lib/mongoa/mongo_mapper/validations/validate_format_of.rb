@@ -1,3 +1,4 @@
+
 module Mongoa
   module MongoMapper
     module Matchers
@@ -34,6 +35,10 @@ module Mongoa
         
         def validation_type
           "ValidatesFormatOf"
+        end
+
+        def validator_class_name
+           "ActiveModel::Validations::FormatValidator"
         end
       end
     end

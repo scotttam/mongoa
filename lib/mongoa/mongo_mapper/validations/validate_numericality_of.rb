@@ -27,6 +27,10 @@ module Mongoa
         def validation_type
           "ValidatesNumericalityOf"
         end
+        
+        def validator_class_name
+           "ActiveModel::Validations::NumericalityValidator"
+        end
       end
     end
   end

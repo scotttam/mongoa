@@ -9,7 +9,7 @@ module Mongoa
 
         def matches?(subject)
           super(subject)
-          @validation ? @validation.within == @within : false
+          @validation ? within == @within : false
         end
 
         def description
@@ -28,6 +28,15 @@ module Mongoa
         
         def validation_type
           "ValidatesInclusionOf"
+        end
+        
+        def validator_class_name
+           "ActiveModel::Validations::InclusionValidator"
+        end
+        
+        #MM - master branch has removed the within
+        def within
+          @validation.respond_to?(:within) ? @validation.within : @validation.options[:in]
         end
       end
     end

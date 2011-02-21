@@ -19,6 +19,10 @@ module Mongoa
         def validation_type
           "ValidatesPresenceOf"
         end
+        
+        def validator_class_name
+          "ActiveModel::Validations::PresenceValidator"
+        end
       end
     end
   end

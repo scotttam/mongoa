@@ -24,4 +24,33 @@ describe Mongoa::MongoMapper do
       end
     end
   end
+  
+  #This is defined by MonoMapper, not ActiveModel
+  if defined?(ActiveModel::Validations::UniquenessValidator)
+    context "ActiveModel" do
+      describe "validates_uniqueness_of or key required => :true" do
+        describe "#validates_uniqueness_of" do
+          it "should return true if the key has a validates_presence_of validtion" do
+            validation = Mongoa::MongoMapper::Matchers::ValidateUniquenessOfMatcher.new(:unique_name)
+            validation.should be_matches(PostActiveModel.new)
+          end
+
+          it "should return false if the key does not have a validates_presence_of validtion" do
+            validation = Mongoa::MongoMapper::Matchers::ValidateUniquenessOfMatcher.new(:foo)
+            validation.should_not be_matches(PostActiveModel.new)
+          end
+        end
+
+        describe "unique" do
+          it "should work the same if the key is unique rather than validates_presence_of" do
+            validation = Mongoa::MongoMapper::Matchers::ValidateUniquenessOfMatcher.new(:unique_name)
+            validation.should be_matches(PostRequiredActiveModel.new)
+
+            validation = Mongoa::MongoMapper::Matchers::ValidateUniquenessOfMatcher.new(:foo)
+            validation.should_not be_matches(PostRequiredActiveModel.new)
+          end
+        end
+      end
+    end
+  end
 end

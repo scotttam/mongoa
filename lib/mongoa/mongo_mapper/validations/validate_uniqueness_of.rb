@@ -27,6 +27,10 @@ module Mongoa
         def validation_type
           "ValidatesUniquenessOf"
         end
+        
+        def validator_class_name
+          "MongoMapper::Plugins::Validations::UniquenessValidator"
+        end
       end
     end
   end
