@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{mongoa}
-  s.version = "0.2.3"
+  s.version = "0.2.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Scott J. Tamosunas"]
-  s.date = %q{2011-02-17}
+  s.date = %q{2011-02-21}
   s.description = %q{Adds the association and validation macros for Rspec in the same way Shoulda does for ActiveRecord.}
   s.email = %q{tamosunas@gmail.com}
   s.extra_rdoc_files = [
